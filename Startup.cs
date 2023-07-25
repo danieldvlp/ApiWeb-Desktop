@@ -1,7 +1,12 @@
+using ApiWeb.Model;
+using ApiWeb.Repository;
+using ApiWeb.Services;
+using ApiWeb.Services.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +33,14 @@ namespace ApiWeb
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<Data.DbContextApi>(options =>
-            options.UseMySql(Configuration.GetConnectionString("MYSQL"), builder => builder.MigrationsAssembly("ApiWeb"))
-            );
 
+            services.AddScoped<IInterfaceDefault<Usuario>, ServiceUsuario>();
+            services.AddScoped<IRepository<Usuario>, Repository<Usuario>>();
+
+            services.AddDbContext<Data.DbContextApi>(options =>
+            {
+                object p = options.UseMySql(Configuration.GetConnectionString("MYSQL"), ServerVersion.AutoDetect(Configuration.GetConnectionString("MYSQL")));
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

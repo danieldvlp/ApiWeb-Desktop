@@ -20,7 +20,5 @@ namespace ApiWeb.Repository
         void Commit();
 
         void Dispose();
-        object BuscaPorID(int id);
-        object BuscaPorId(object id);
     }
 }

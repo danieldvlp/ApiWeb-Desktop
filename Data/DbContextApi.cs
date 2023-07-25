@@ -20,6 +20,5 @@ namespace ApiWeb.Data
         }
 
         public DbSet<Usuario> Usuario { get; set; }
-
     }
 }

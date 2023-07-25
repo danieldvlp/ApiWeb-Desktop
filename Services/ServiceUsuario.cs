@@ -53,10 +53,10 @@ namespace ApiWeb.Services
 
         void IInterfaceDefault<Usuario>.Excluir(int id)
         {
-            var usuario = serviceUsuario.BuscaPorId(Id);
+            var usuario = serviceUsuario.BuscaPorId(id);
 
-            if (Usuario != null)
-                serviceUsuario.Remover(Usuario);
+            if (usuario != null)
+                serviceUsuario.Remover(usuario);
 
         }
     }
